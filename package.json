@@ -1,0 +1,61 @@
+{
+  "name": "sailsman",
+  "version": "1.0.0",
+  "description": "Test helpers for testing Sails JS API methods",
+  "keywords": [
+    "sails",
+    "sailsjs",
+    "test",
+    "helpers",
+    "supertest",
+    "express",
+    "javascript",
+    "node"
+  ],
+  "dependencies": {
+    "intercept-stdout": "^0.1.2",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "sails": "^1.2.3",
+    "chai": "^4.2.0",
+    "chai-string": "^1.5.0",
+    "eslint": "5.16.0",
+    "eslint-plugin-import": "^2.18.0",
+    "husky": "^2.7.0",
+    "lint-staged": "^9.2.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.3.2"
+  },
+  "scripts": {
+    "coverage": "nyc --all npm run test",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives",
+    "lint:fix": "npm run lint -- --fix",
+    "test:watch": "npm run test -- --bail --watch",
+    "test": "NODE_ENV=test mocha"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "lint-staged": {
+    ".{js}": [
+      "eslint . --max-warnings=0 --report-unused-disable-directives --fix",
+      "git add"
+    ]
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mifkata/sailsman.git"
+  },
+  "author": "mifkata",
+  "license": "MIT",
+  "engines": {
+    "node": "^8.10"
+  }
+}

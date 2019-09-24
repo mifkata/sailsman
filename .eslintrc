@@ -1,0 +1,78 @@
+{
+  "plugins": ["import"],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "globals": {
+    "Promise": true,
+    "sails": true
+  },
+  "rules": {
+    "no-var": ["error"],
+    "object-curly-newline": ["error", {
+      "ObjectExpression": { "multiline": true, "consistent": true },
+      "ObjectPattern": { "multiline": true },
+      "ImportDeclaration": { "multiline": true, "minProperties": 4 },
+      "ExportDeclaration": { "multiline": true, "minProperties": 4 }
+  }],
+    "prefer-const": ["error"],
+    "strict": ["error"],
+    "block-scoped-var": ["error"],
+    "callback-return": ["error", ["done", "proceed", "next", "onwards", "callback", "cb"]],
+    "camelcase": ["error", {"properties":"always"}],
+    "brace-style": ["error"],
+    "comma-style": ["error", "last"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline"
+    }],
+    "import/newline-after-import": ["error"],
+    "curly": ["error"],
+    "eqeqeq": ["error", "always"],
+    "eol-last": ["error"],
+    "handle-callback-err": ["error"],
+    "indent": ["error", 2, {
+      "SwitchCase": 1,
+      "MemberExpression": "off",
+      "FunctionDeclaration": {
+        "body": 1,
+        "parameters": "off"
+      },
+      "FunctionExpression": {
+        "body": 1,
+        "parameters": "off"
+      },
+      "CallExpression": {
+        "arguments": "off"
+      },
+      "ArrayExpression": 1,
+      "ObjectExpression": 1,
+      "ignoredNodes": ["ConditionalExpression"]
+    }],
+    "linebreak-style": ["error", "unix"],
+    "no-dupe-keys": ["error"],
+    "no-duplicate-case": ["error"],
+    "no-extra-semi": ["error"],
+    "no-labels": ["error"],
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+    "no-redeclare": ["error"],
+    "no-return-assign": ["error", "always"],
+    "no-sequences": ["error"],
+    "no-trailing-spaces": ["error"],
+    "no-undef": ["error"],
+    "no-unexpected-multiline": ["error"],
+    "no-unreachable": ["error"],
+    "no-unused-vars": ["error", {"caughtErrors":"all", "caughtErrorsIgnorePattern": "^unused($|[A-Z].*$)", "argsIgnorePattern": "^unused($|[A-Z].*$)", "varsIgnorePattern": "^unused($|[A-Z].*$)" }],
+    "no-use-before-define": ["error", {"functions":false}],
+    "one-var": ["error", "never"],
+    "prefer-arrow-callback": ["error", {"allowNamedFunctions":true}],
+    "arrow-parens": ["error", "as-needed"],
+    "quotes": ["error", "single", {"avoidEscape":false, "allowTemplateLiterals":true}],
+    "semi": ["error", "always"],
+    "semi-spacing": ["error", {"before":false, "after":true}],
+    "semi-style": ["error", "last"]
+  }
+}
