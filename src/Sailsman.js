@@ -67,19 +67,21 @@ class Sailsman {
     }
 
     try {
+      await this.deleteTestDb();
+
       this[instance] = new sails.Sails();
       const lift = promisify(this[instance].lift);
 
       this[app] = await lift(this[config]);
-      this[agent] = supertest(this[app].hooks.http.app);
+      await this.loadDataFixtures();
+
+      this[agent] = supertest.agent(this[app].hooks.http.app);
       this[session] = new SessionManager({
         app: this[app],
         agent: this[agent],
         sails: this[instance],
         cookieUrl: this[cookiemonster],
       });
-
-      await this.loadDataFixtures();
 
       return true;
     } catch(e) {
@@ -89,7 +91,7 @@ class Sailsman {
 
   async stop() {
     if(!this[instance]) {
-      throw new Error('Sailsman.stop() failed: no Sails instance to stop');
+      return true;
     }
 
     try {
@@ -103,25 +105,35 @@ class Sailsman {
     }
   }
 
-  async restart() {
-    if(!this[instance]) {
-      throw new Error('Sailsman.restart() failed: no Sails instance to restart');
-    }
-
+  async startSilent() {
     const stopOutputCapture = captureOutput();
     await this.start();
     return stopOutputCapture();
   }
 
-  async loadDataFixtures() {
+  async restart() {
+    if(!this[instance]) {
+      throw new Error('Sailsman.restart() failed: no Sails instance to restart');
+    }
+
+    return this.startSilent();
+  }
+
+  async deleteTestDb() {
     const { path, dbPath } = this[fixtures];
+
+    if(isDir(path) && isDir(dbPath)) {
+      await rmdir(dbPath);
+    }
+
+    return true;
+  }
+
+  async loadDataFixtures() {
+    const { path } = this[fixtures];
 
     if(!isDir(path)) {
       return true;
-    }
-
-    if(isDir(dbPath)) {
-      await rmdir(dbPath);
     }
 
     return loadFixtures(this[app], path);

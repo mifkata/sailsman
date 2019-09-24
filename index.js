@@ -1,5 +1,5 @@
 'use strict';
 
-const { Sailsman } = require('./lib/Sailsman');
+const { Sailsman } = require('./src/Sailsman');
 
 module.exports = { Sailsman };

@@ -5,7 +5,7 @@ Sailsman allows you to:
   * Start, stop and restart sails
   * Load fixtures
   * Set the session values for the current user
-  * Make API calls to `sails` using [superagent](https://github.com/visionmedia/superagent)
+  * Make API calls to `sails` using [supertest](https://github.com/visionmedia/supertest)
 
 The goal is, with minimal setup to be able to configure [mocha](https://github.com/mochajs/mocha  (or another test runner) to `lift` or `lower` Sails at any point in time, whilst giving you the same easy of access to global variables, as `sails` would.
 
