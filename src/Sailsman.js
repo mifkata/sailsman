@@ -30,7 +30,7 @@ class Sailsman {
       ...sailsConfig,
       routes: {
         ...sailsConfig.routes,
-        [`GET ${this[cookiemonster]}`]: (_, res) => res.send(200),
+        [`GET ${this[cookiemonster]}`]: (_, res) => res.sendStatus(200),
       },
     };
 
