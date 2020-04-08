@@ -21,6 +21,22 @@ const defaultFixtureConfig = {
   dbPath: null,
 };
 
+const deleteTestDb = async fixtures => {
+  if(isDir(fixtures.path) && isDir(fixtures.dbPath)) {
+    await rmdir(fixtures.dbPath);
+  }
+
+  return true;
+};
+
+const loadDataFixtures = async (app, fixtures) => {
+  if(!isDir(fixtures.path)) {
+    return true;
+  }
+
+  return loadFixtures(app, fixtures.path);
+};
+
 class Sailsman {
   constructor(sailsConfig, fixtureConfig) {
     sails.log.debug = () => null;
@@ -67,13 +83,13 @@ class Sailsman {
     }
 
     try {
-      await this.deleteTestDb();
+      await deleteTestDb(this[fixtures]);
 
       this[instance] = new sails.Sails();
       const lift = promisify(this[instance].lift);
 
       this[app] = await lift(this[config]);
-      await this.loadDataFixtures();
+      await loadDataFixtures(this[app], this[fixtures]);
 
       this[agent] = supertest.agent(this[app].hooks.http.app);
       this[session] = new SessionManager({
@@ -117,26 +133,6 @@ class Sailsman {
     }
 
     return this.start();
-  }
-
-  async deleteTestDb() {
-    const { path, dbPath } = this[fixtures];
-
-    if(isDir(path) && isDir(dbPath)) {
-      await rmdir(dbPath);
-    }
-
-    return true;
-  }
-
-  async loadDataFixtures() {
-    const { path } = this[fixtures];
-
-    if(!isDir(path)) {
-      return true;
-    }
-
-    return loadFixtures(this[app], path);
   }
 }
 
