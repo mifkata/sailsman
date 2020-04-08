@@ -92,18 +92,16 @@ describe('Endpoint test', () => {
 
 ## Sailsman API
 
-| | |
-|-|-|
-| `global.sailsman = new Sailsman(sailsOptions, fixtureOptions)`| Creates new instance of Sailsman. For `sailsOptions` read the [Advanced Usage](https://sailsjs.com/documentation/reference/application/advanced-usage) documentation on sails under section `Properties (advanced)`. For `fixtureOptions` read below |
-| `sailsman.start()` (async) | Starts/Lifts `sails` |
-| `sailsman.startVerbose()` (async) | Same as `sailsman.start()`, but also displays the Sails lift output. |
-| `sailsman.stop()` (async) | Stops/Lowers `sails` |
-| `sailsman.restart()` (async) | Restarts `sails`. This is useful when you want to test different behaviour, based on different environment variable settings. |
-| `sailsman.getSession()` | Returns an instance of the `sails` session for the test agent. This is the same as `req.session` inside a controller action or a policy/middleware |
-| `sailsman.setSession(newValue)` | This replaces the current session object's value for the test agent. Example usage `sailsman.setSession({ id: 'test', email: 'test@test.com' })`. |
-| `sailsman.agent` | Returns an instance of `supertest` that is bound to the `express` instance, that `sails` run. From there you can run `sails.agent.get()`, `sails.agent.post()`, etc. Refer to the [Supertest Documentation](https://github.com/visionmedia/supertest#example) for more information. |
-| `sailsman.sails` | Returns the `sails` instance, created with `new require('sails').Sails()` |
-| `sailsman.app` | The app created by running `sailsman.sails.lift()` |
+* `global.sailsman = new Sailsman(sailsOptions, fixtureOptions)` - Creates new instance of Sailsman. For `sailsOptions` read the [Advanced Usage](https://sailsjs.com/documentation/reference/application/advanced-usage) documentation on sails under section `Properties (advanced)`. For `fixtureOptions` read below
+* `sailsman.start()` (async) - Starts/Lifts `sails`
+* `sailsman.startVerbose()` (async) - Same as `sailsman.start()`, but also displays the Sails lift output. |
+* `sailsman.stop()` (async) - Stops/Lowers `sails`
+* `sailsman.restart()` (async) - Restarts `sails`. This is useful when you want to test different behaviour, based on different environment variable settings.
+* `sailsman.getSession()` (async) - Returns an instance of the `sails` session for the test agent. This is the same as `req.session` inside a controller action or a policy/middleware
+* `sailsman.setSession(newValue)` (async) - This replaces the current session object's value for the test agent. Example usage `sailsman.setSession({ id: 'test', email: 'test@test.com' })`.
+* `sailsman.agent` - Returns an instance of `supertest` that is bound to the `express` instance, that `sails` run. From there you can run `sails.agent.get()`, `sails.agent.post()`, etc. Refer to the [Supertest Documentation](https://github.com/visionmedia/supertest#example) for more information.
+* `sailsman.sails` - Returns the `sails` instance, created with `new require('sails').Sails()`
+* `sailsman.app` - The app created by running `sailsman.sails.lift()`
 
 ## Working with fixtures
 There's not much magic around implementing fixtures with `Sailsman`. Simply said, these will populate your test database much more easily, than having to do them manually in a different way. 
