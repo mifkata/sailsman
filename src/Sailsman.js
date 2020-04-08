@@ -61,7 +61,7 @@ class Sailsman {
     return this[session].setSession(data);
   }
 
-  async start() {
+  async startVerbose() {
     if(this[instance]) {
       await this.stop();
     }
@@ -105,9 +105,9 @@ class Sailsman {
     }
   }
 
-  async startSilent() {
+  async start() {
     const stopOutputCapture = captureOutput();
-    await this.start();
+    await this.startVerbose();
     return stopOutputCapture();
   }
 
@@ -116,7 +116,7 @@ class Sailsman {
       throw new Error('Sailsman.restart() failed: no Sails instance to restart');
     }
 
-    return this.startSilent();
+    return this.start();
   }
 
   async deleteTestDb() {
