@@ -37,7 +37,7 @@ const loadFixtures = async (app, fixturesPath) => {
     } else {
       console.info(`[Fixtures] Inserting ${records.length} records from fixtures/${fixture}`);
       promises.push(
-        app.models[model].createEach(records)
+        app.models[model].createEach(records).meta({ fetch: true })
       );
     }
   });
